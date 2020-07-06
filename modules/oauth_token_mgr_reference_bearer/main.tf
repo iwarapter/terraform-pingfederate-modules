@@ -1,4 +1,4 @@
-resource "pingfederate_oauth_access_token_manager_v2" "reftokenmgr" {
+resource "pingfederate_oauth_access_token_manager" "reftokenmgr" {
   instance_id = var.instance_id
   name        = var.name
 
