@@ -52,3 +52,20 @@ resource "pingfederate_oauth_access_token_manager" "reftokenmgr" {
     extended_attributes = var.extended_attributes
   }
 }
+
+resource "pingfederate_oauth_access_token_mappings" "reftokenmgrcc" {
+  access_token_manager_ref {
+    id = module.client_credentials.pingfederate_oauth_access_token_manager.id
+  }
+
+  context {
+    type = "CLIENT_CREDENTIALS"
+  }
+  attribute_contract_fulfillment {
+    key_name = "sub"
+    source {
+      type = "CONTEXT"
+    }
+    value = "ClientId"
+  }
+}
