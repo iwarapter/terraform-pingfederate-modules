@@ -9,63 +9,46 @@ resource "pingfederate_oauth_access_token_manager" "reftokenmgr" {
   configuration {
     fields {
       name  = "Token Length"
-      value = "28"
+      value = var.token_length
     }
 
     fields {
       name  = "Token Lifetime"
-      value = "120"
+      value = var.token_lifetime
     }
 
     fields {
       name  = "Lifetime Extension Policy"
-      value = "ALL"
+      value = var.lifetime_policy
     }
 
     fields {
       name  = "Maximum Token Lifetime"
-      value = ""
+      value = var.maximum_token_lifetime
     }
 
     fields {
       name  = "Lifetime Extension Threshold Percentage"
-      value = "30"
+      value = var.lifetime_extention_threshold
     }
 
     fields {
       name  = "Mode for Synchronous RPC"
-      value = "3"
+      value = var.mode_sync
     }
 
     fields {
       name  = "RPC Timeout"
-      value = "500"
+      value = var.rpc_timeout
     }
 
     fields {
       name  = "Expand Scope Groups"
-      value = "false"
+      value = var.expanded_scopes
     }
   }
 
   attribute_contract {
     extended_attributes = var.extended_attributes
-  }
-}
-
-resource "pingfederate_oauth_access_token_mappings" "reftokenmgrcc" {
-  access_token_manager_ref {
-    id = module.client_credentials.pingfederate_oauth_access_token_manager.id
-  }
-
-  context {
-    type = "CLIENT_CREDENTIALS"
-  }
-  attribute_contract_fulfillment {
-    key_name = "sub"
-    source {
-      type = "CONTEXT"
-    }
-    value = "ClientId"
   }
 }
