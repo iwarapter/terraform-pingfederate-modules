@@ -1,3 +1,7 @@
+This is a module for oauth token manager with the `org.sourceid.oauth20.token.plugin.impl.ReferenceBearerAccessTokenManagementPlugin` implementation.
+
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 No requirements.
@@ -27,3 +31,5 @@ No requirements.
 ## Outputs
 
 No output.
+
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
