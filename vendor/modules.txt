@@ -1,0 +1,57 @@
+# github.com/davecgh/go-spew v1.1.1
+github.com/davecgh/go-spew/spew
+# github.com/google/go-cmp v0.5.0
+## explicit
+# github.com/google/uuid v1.1.1
+github.com/google/uuid
+# github.com/gruntwork-io/terratest v0.30.0
+## explicit
+github.com/gruntwork-io/terratest/modules/collections
+github.com/gruntwork-io/terratest/modules/customerrors
+github.com/gruntwork-io/terratest/modules/files
+github.com/gruntwork-io/terratest/modules/logger
+github.com/gruntwork-io/terratest/modules/retry
+github.com/gruntwork-io/terratest/modules/shell
+github.com/gruntwork-io/terratest/modules/ssh
+github.com/gruntwork-io/terratest/modules/terraform
+github.com/gruntwork-io/terratest/modules/testing
+# github.com/iwarapter/pingfederate-sdk-go v0.0.0-20200922173109-6fb132345a6a
+## explicit
+github.com/iwarapter/pingfederate-sdk-go/pingfederate
+github.com/iwarapter/pingfederate-sdk-go/pingfederate/client
+github.com/iwarapter/pingfederate-sdk-go/pingfederate/client/metadata
+github.com/iwarapter/pingfederate-sdk-go/pingfederate/config
+github.com/iwarapter/pingfederate-sdk-go/pingfederate/models
+github.com/iwarapter/pingfederate-sdk-go/pingfederate/request
+github.com/iwarapter/pingfederate-sdk-go/services/oauthAccessTokenManagers
+# github.com/kr/text v0.2.0
+## explicit
+# github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e
+## explicit
+# github.com/pmezard/go-difflib v1.0.0
+github.com/pmezard/go-difflib/difflib
+# github.com/stretchr/testify v1.6.1
+## explicit
+github.com/stretchr/testify/assert
+github.com/stretchr/testify/require
+# golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
+golang.org/x/crypto/blowfish
+golang.org/x/crypto/chacha20
+golang.org/x/crypto/curve25519
+golang.org/x/crypto/ed25519
+golang.org/x/crypto/ed25519/internal/edwards25519
+golang.org/x/crypto/internal/subtle
+golang.org/x/crypto/poly1305
+golang.org/x/crypto/ssh
+golang.org/x/crypto/ssh/agent
+golang.org/x/crypto/ssh/internal/bcrypt_pbkdf
+# golang.org/x/net v0.0.0-20200707034311-ab3426394381
+## explicit
+golang.org/x/net/context
+# golang.org/x/sys v0.0.0-20200523222454-059865788121
+## explicit
+golang.org/x/sys/cpu
+# gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f
+## explicit
+# gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
+gopkg.in/yaml.v3

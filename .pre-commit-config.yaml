@@ -2,11 +2,32 @@
   rev: v2.5.0  # Use the ref you want to point at
   hooks:
     - id: trailing-whitespace
+      exclude: '^vendor/.*$'
     - id: end-of-file-fixer
+      exclude: '^vendor/.*$'
     - id: check-added-large-files
+      exclude: '^vendor/.*$'
+- repo: git://github.com/dnephin/pre-commit-golang
+  rev: master
+  hooks:
+    - id: go-fmt
+      exclude: '^vendor/.*$'
+    - id: go-imports
+      exclude: '^vendor/.*$'
+    - id: go-mod-tidy
+      exclude: '^vendor/.*$'
 - repo: git://github.com/antonbabenko/pre-commit-terraform
-  rev: v1.29.0
+  rev: v1.32.0
   hooks:
     - id: terraform_fmt
-    - id: terraform_tflint
     - id: terraform_docs_without_aggregate_type_defaults
+    - id: terraform_docs_without_aggregate_type_defaults
+      files: modules/.*
+    - id: terraform_validate
+      files: (\.tf|\.tfvars)$
+      exclude: (\.terraform\/.*|variables\/.*)$
+    - id: terraform_tflint
+      args: ['--args', '--config=.tflint.hcl']
+    - id: terraform_tflint
+      args: ['--args', '--config=../../.tflint.hcl']
+      files: (modules\/.+\/.+.tf)
