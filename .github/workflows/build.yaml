@@ -1,0 +1,35 @@
+on: [push, pull_request]
+name: ci
+jobs:
+  build:
+    name: ci
+    services:
+      pingfederate:
+        image: pingidentity/pingfederate:10.0.5-edge
+        env:
+          PING_IDENTITY_ACCEPT_EULA: YES
+          PING_IDENTITY_DEVOPS_USER: ${{ secrets.PING_IDENTITY_DEVOPS_USER }}
+          PING_IDENTITY_DEVOPS_KEY: ${{ secrets.PING_IDENTITY_DEVOPS_KEY }}
+          SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
+          SERVER_PROFILE_PATH: getting-started/pingfederate
+        ports:
+          - 9999:9999
+          - 9031:9031
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Set up Go 1.14
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.14
+        id: go
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+
+      - name: Test
+        env:
+          PING_IDENTITY_DEVOPS_USER: ${{ secrets.PING_IDENTITY_DEVOPS_USER }}
+          PING_IDENTITY_DEVOPS_KEY: ${{ secrets.PING_IDENTITY_DEVOPS_KEY }}
+        run: |
+          make test

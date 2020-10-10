@@ -1,4 +1,4 @@
-module github.com/iwarapter/pf_modules
+module github.com/iwarapter/pingfederate-terraform-modules
 
 go 1.14
 
