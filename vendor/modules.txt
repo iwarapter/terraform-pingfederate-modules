@@ -25,6 +25,7 @@ github.com/iwarapter/pingfederate-sdk-go/pingfederate/models
 github.com/iwarapter/pingfederate-sdk-go/pingfederate/request
 github.com/iwarapter/pingfederate-sdk-go/services/idpAdapters
 github.com/iwarapter/pingfederate-sdk-go/services/oauthAccessTokenManagers
+github.com/iwarapter/pingfederate-sdk-go/services/version
 # github.com/kr/text v0.2.0
 ## explicit
 # github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e
