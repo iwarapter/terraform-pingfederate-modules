@@ -21,7 +21,7 @@ variable "challenge_retries" {
 }
 
 variable "session_state" {
-  description = "Determines how state is maintained within one adapter or between different adapter instances. To take advantage of additional features, it is recommended to use a PingFederate Authentication Session rather than this adapter's internal Session State capability."
+  description = "Determines how state is maintained within one adapter or between different adapter instances."
   default     = "None"
   type        = string
 
@@ -50,19 +50,19 @@ variable "allow_password_changes" {
 }
 
 variable "enable_remember_my_username" {
-  description = "Allows users to store their username as a cookie when authenticating with this adapter. Once stored, the username is pre-populated in the login form's username field on subsequent transactions."
+  description = "Allows users to store their username as a cookie when authenticating with this adapter."
   default     = false
   type        = bool
 }
 
 variable "enable_this_is_my_device" {
-  description = "Allows users to indicate whether their device is shared or private. In this mode, PingFederate Authentication Sessions will not be stored unless the user indicates the device is private. This adapter's internal session tracking (if enabled) will not be affected by the user's selection."
+  description = "Allows users to indicate whether their device is shared or private."
   default     = false
   type        = bool
 }
 
 variable "change_password_email_notification" {
-  description = "Send users a notification upon a password change. This feature relies on the underlying PCV returning 'mail' and 'givenName' attributes containing the user's first name and e-mail address. Additionally, a notification publisher must be configured."
+  description = "Send users a notification upon a password change."
   default     = false
   type        = bool
 }
