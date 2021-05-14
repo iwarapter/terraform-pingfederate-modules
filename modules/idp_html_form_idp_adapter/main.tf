@@ -2,14 +2,17 @@ terraform {
   required_providers {
     pingfederate = {
       source  = "iwarapter/pingfederate"
-      version = "~> 0.0.5"
+      version = "~> 0.0.16"
     }
   }
 }
 
-resource "pingfederate_idp_adapter" "adapter" {
+provider "pingfederate" {
   bypass_external_validation = var.bypass_external_validation
-  name                       = var.name
+}
+
+resource "pingfederate_idp_adapter" "adapter" {
+  name = var.name
   plugin_descriptor_ref {
     id = "com.pingidentity.adapters.htmlform.idp.HtmlFormIdpAuthnAdapter"
   }

@@ -1,18 +1,19 @@
-This is a module for idp HTML Form IDP Adapter with the `com.pingidentity.adapters.htmlform.idp.HtmlFormIdpAuthnAdapter` implementation.
+# IDP Adapter - Html Form Adapter
 
+This is a module for idp HTML Form IDP Adapter with the `com.pingidentity.adapters.htmlform.idp.HtmlFormIdpAuthnAdapter` implementation.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| pingfederate | ~> 0.0.5 |
+| pingfederate | ~> 0.0.16 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| pingfederate | ~> 0.0.5 |
+| pingfederate | ~> 0.0.16 |
 
 ## Inputs
 

@@ -1,18 +1,19 @@
-This is a module for oauth token manager with the `org.sourceid.oauth20.token.plugin.impl.ReferenceBearerAccessTokenManagementPlugin` implementation.
+# OAuth Token Manager - Reference Bearer
 
+This is a module for oauth token manager with the `org.sourceid.oauth20.token.plugin.impl.ReferenceBearerAccessTokenManagementPlugin` implementation.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| pingfederate | ~> 0.0.5 |
+| pingfederate | ~> 0.0.16 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| pingfederate | ~> 0.0.5 |
+| pingfederate | ~> 0.0.16 |
 
 ## Inputs
 

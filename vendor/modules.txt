@@ -23,8 +23,10 @@ github.com/iwarapter/pingfederate-sdk-go/pingfederate/client/metadata
 github.com/iwarapter/pingfederate-sdk-go/pingfederate/config
 github.com/iwarapter/pingfederate-sdk-go/pingfederate/models
 github.com/iwarapter/pingfederate-sdk-go/pingfederate/request
+github.com/iwarapter/pingfederate-sdk-go/services/authenticationSelectors
 github.com/iwarapter/pingfederate-sdk-go/services/idpAdapters
 github.com/iwarapter/pingfederate-sdk-go/services/oauthAccessTokenManagers
+github.com/iwarapter/pingfederate-sdk-go/services/passwordCredentialValidators
 github.com/iwarapter/pingfederate-sdk-go/services/version
 # github.com/kr/text v0.2.0
 ## explicit
