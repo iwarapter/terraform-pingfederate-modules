@@ -32,6 +32,7 @@ This is a module for idp HTML Form IDP Adapter with the `com.pingidentity.adapte
 | notification\_publisher | Optionally associate this instance with a notification delivery mechanism. | `string` | `null` | no |
 | password\_credential\_validator\_id | The ID for the password credential validator | `string` | n/a | yes |
 | password\_reset\_type | Select the method to use for self-service password reset. | `string` | `"NONE"` | no |
+| pingfederate\_version | Target PingFederate Version | `string` | `"10.0"` | no |
 | session\_max\_timeout | Session Max Timeout (in minutes). Leave blank for indefinite sessions. Ignored if 'None' is selected for Session State. | `number` | `480` | no |
 | session\_state | Determines how state is maintained within one adapter or between different adapter instances. | `string` | `"None"` | no |
 | session\_timeout | Session Idle Timeout (in minutes). If left blank the timeout will be the Session Max Timeout. Ignored if 'None' is selected for Session State. | `number` | `60` | no |

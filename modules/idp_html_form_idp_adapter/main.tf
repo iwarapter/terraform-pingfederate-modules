@@ -11,6 +11,9 @@ provider "pingfederate" {
   bypass_external_validation = var.bypass_external_validation
 }
 
+locals {
+  isPF10_2 = length(regexall("10.[2]", var.pingfederate_version)) > 0
+}
 resource "pingfederate_idp_adapter" "adapter" {
   name = var.name
   plugin_descriptor_ref {
@@ -25,6 +28,21 @@ resource "pingfederate_idp_adapter" "adapter" {
           name  = "Password Credential Validator Instance"
           value = var.password_credential_validator_id
         }
+      }
+    }
+
+    dynamic "fields" {
+      for_each = local.isPF10_2 ? [1] : []
+      content {
+        name = "Change Password Policy Contract"
+      }
+    }
+
+    dynamic "fields" {
+      for_each = local.isPF10_2 ? [1] : []
+      content {
+        name  = "Revoke Sessions After Password Change Or Reset"
+        value = "false"
       }
     }
 

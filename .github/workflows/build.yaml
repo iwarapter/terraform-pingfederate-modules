@@ -38,5 +38,6 @@ jobs:
       - name: Test
         env:
           PINGFEDERATE_PASSWORD: 2FederateM0re
+          TF_VAR_pingfederate_version: ${{ matrix.pingfederate-version }}
         run: |
           go test -count=1 -v -timeout 30m  ./...
