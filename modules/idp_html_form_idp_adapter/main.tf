@@ -67,7 +67,8 @@ resource "pingfederate_idp_adapter" "adapter" {
       value = var.allow_password_changes
     }
     fields {
-      name = "Password Management System"
+      name  = "Password Management System"
+      value = var.password_management_system
     }
     fields {
       name  = "Enable 'Remember My Username'"
@@ -90,14 +91,16 @@ resource "pingfederate_idp_adapter" "adapter" {
       value = var.password_reset_type
     }
     fields {
-      name = "Password Reset Policy Contract"
+      name  = "Password Reset Policy Contract"
+      value = var.password_reset_policy_contract
     }
     fields {
       name  = "Account Unlock"
-      value = "false"
+      value = var.account_unlock
     }
     fields {
-      name = "Local Identity Profile"
+      name  = "Local Identity Profile"
+      value = var.local_identity_profile
     }
     fields {
       name  = "Notification Publisher"
@@ -105,140 +108,143 @@ resource "pingfederate_idp_adapter" "adapter" {
     }
     fields {
       name  = "Enable Username Recovery"
-      value = "false"
+      value = var.enable_username_recovery
     }
     fields {
       name  = "Login Template"
-      value = "html.form.login.template.html"
+      value = var.login_template
     }
     fields {
-      name = "Logout Path"
+      name  = "Logout Path"
+      value = var.logout_path
     }
     fields {
-      name = "Logout Redirect"
+      name  = "Logout Redirect"
+      value = var.logout_redirect
     }
     fields {
       name  = "Logout Template"
-      value = "idp.logout.success.page.template.html"
+      value = var.logout_template
     }
     fields {
       name  = "Change Password Template"
-      value = "html.form.change.password.template.html"
+      value = var.change_password_template
     }
     fields {
       name  = "Change Password Message Template"
-      value = "html.form.message.template.html"
+      value = var.change_password_message_template
     }
     fields {
       name  = "Password Management System Message Template"
-      value = "html.form.message.template.html"
+      value = var.password_management_system_message_template
     }
     fields {
       name  = "Change Password Email Template"
-      value = "message-template-end-user-password-change.html"
+      value = var.change_password_email_template
     }
     fields {
       name  = "Expiring Password Warning Template"
-      value = "html.form.password.expiring.notification.template.html"
+      value = var.expiring_password_warning_template
     }
     fields {
       name  = "Threshold for Expiring Password Warning"
-      value = "7"
+      value = var.threshold_for_expiring_password_warning
     }
     fields {
       name  = "Snooze Interval for Expiring Password Warning"
-      value = "24"
+      value = var.snooze_interval_for_expiring_password_warning
     }
     fields {
       name  = "Login Challenge Template"
-      value = "html.form.login.challenge.template.html"
+      value = var.login_challenge_template
     }
     fields {
       name  = "'Remember My Username' Lifetime"
-      value = "30"
+      value = var.remember_my_username_lifetime
     }
     fields {
       name  = "'This is My Device' Lifetime"
-      value = "30"
+      value = var.this_is_my_device_lifetime
     }
     fields {
       name  = "Allow Username Edits During Chaining"
-      value = "false"
+      value = var.allow_username_edits_during_chaining
     }
     fields {
       name  = "Track Authentication Time"
-      value = "true"
+      value = var.track_authentication_time
     }
     fields {
       name  = "Post-Password Change Re-Authentication Delay"
-      value = "0"
+      value = var.post_password_change_re_authentication_delay
     }
     fields {
       name  = "Password Reset Username Template"
-      value = "forgot-password.html"
+      value = var.password_reset_username_template
     }
     fields {
       name  = "Password Reset Code Template"
-      value = "forgot-password-resume.html"
+      value = var.password_reset_code_template
     }
     fields {
       name  = "Password Reset Template"
-      value = "forgot-password-change.html"
+      value = var.password_reset_template
     }
     fields {
       name  = "Password Reset Error Template"
-      value = "forgot-password-error.html"
+      value = var.password_reset_error_template
     }
     fields {
       name  = "Password Reset Success Template"
-      value = "forgot-password-success.html"
+      value = var.password_reset_success_template
     }
     fields {
       name  = "Account Unlock Template"
-      value = "account-unlock.html"
+      value = var.account_unlock_template
     }
     fields {
       name  = "OTP Length"
-      value = "8"
+      value = var.otp_length
     }
     fields {
       name  = "OTP Time to Live"
-      value = "10"
+      value = var.otp_time_to_live
     }
     fields {
-      name = "PingID Properties"
+      name  = "PingID Properties"
+      value = var.ping_id_properties
     }
     fields {
       name  = "Require Verified Email"
-      value = "false"
+      value = var.require_verified_email
     }
     fields {
       name  = "Username Recovery Template"
-      value = "username.recovery.template.html"
+      value = var.username_recovery_template
     }
     fields {
       name  = "Username Recovery Info Template"
-      value = "username.recovery.info.template.html"
+      value = var.username_recovery_info_template
     }
     fields {
       name  = "Username Recovery Email Template"
-      value = "message-template-username-recovery.html"
+      value = var.username_recovery_email_template
     }
     fields {
       name  = "CAPTCHA for Authentication"
-      value = "false"
+      value = var.captcha_for_authentication
     }
     fields {
       name  = "CAPTCHA for Password change"
-      value = "false"
+      value = var.captcha_for_password_change
     }
     fields {
       name  = "CAPTCHA for Password Reset"
-      value = "false"
+      value = var.captcha_for_password_reset
     }
     fields {
       name  = "CAPTCHA for Username recovery"
-      value = "false"
+      value = var.captcha_for_username_recovery
     }
   }
 
