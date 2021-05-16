@@ -41,8 +41,8 @@ func TestIdpAdapterHtmlFormAdapter(t *testing.T) {
 				TerraformDir: "../modules/idp_html_form_idp_adapter",
 
 				Vars: map[string]interface{}{
-					"name":                             tc.name,
-					"password_credential_validator_id": "examplepcv",
+					"name":                              tc.name,
+					"password_credential_validator_ids": []string{"examplepcv"},
 				},
 				NoColor: true,
 			}

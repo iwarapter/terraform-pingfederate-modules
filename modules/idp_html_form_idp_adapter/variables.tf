@@ -20,9 +20,9 @@ variable "name" {
   type        = string
 }
 
-variable "password_credential_validator_id" {
+variable "password_credential_validator_ids" {
   description = "The ID for the password credential validator"
-  type        = string
+  type        = list(string)
 }
 variable "challenge_retries" {
   description = "Number of failed user authentications after which the PingFederate account locking service blocks future attempts."

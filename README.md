@@ -2,8 +2,6 @@
 
 This is a collection of module for PingFederate designed to wrap the specific class implementations for various resources.
 
-
-
 ## Usage
 ```hcl
 module "example" {

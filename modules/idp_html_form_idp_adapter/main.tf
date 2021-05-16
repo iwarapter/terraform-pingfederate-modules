@@ -23,10 +23,13 @@ resource "pingfederate_idp_adapter" "adapter" {
   configuration {
     tables {
       name = "Credential Validators"
-      rows {
-        fields {
-          name  = "Password Credential Validator Instance"
-          value = var.password_credential_validator_id
+      dynamic "rows" {
+        for_each = var.password_credential_validator_ids
+        content {
+          fields {
+            name  = "Password Credential Validator Instance"
+            value = var.password_credential_validator_ids[rows.key]
+          }
         }
       }
     }

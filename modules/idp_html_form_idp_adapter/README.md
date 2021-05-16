@@ -2,6 +2,16 @@
 
 This is a module for idp HTML Form IDP Adapter with the `com.pingidentity.adapters.htmlform.idp.HtmlFormIdpAuthnAdapter` implementation.
 
+## Usage
+
+```hcl
+module "example" {
+  source                           = "git@github.com:iwarapter/pingfederate-terraform-modules//modules/idp_html_form_idp_adapter"
+  password_credential_validator_id = "example"
+  name                             = "example"
+}
+```
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
@@ -50,7 +60,7 @@ This is a module for idp HTML Form IDP Adapter with the `com.pingidentity.adapte
 | notification\_publisher | Optionally associate this instance with a notification delivery mechanism | `string` | `null` | no |
 | otp\_length | For self-service password reset, the number of characters used in one-time passwords | `number` | `8` | no |
 | otp\_time\_to\_live | For self-service password reset, the validity period (in minutes) for password reset tokens | `number` | `10` | no |
-| password\_credential\_validator\_id | The ID for the password credential validator | `string` | n/a | yes |
+| password\_credential\_validator\_ids | The ID for the password credential validator | `list(string)` | n/a | yes |
 | password\_management\_system | A fully-qualified URL to your password management system where users can change their password | `string` | `""` | no |
 | password\_management\_system\_message\_template | HTML template (in <pf\_home>/server/default/conf/template) to render when a user is being redirected to the password management system to change their password | `string` | `"html.form.message.template.html"` | no |
 | password\_reset\_code\_template | HTML template (in <pf\_home>/server/default/conf/template) rendered to prompt a user for a code challenge during password reset | `string` | `"forgot-password-resume.html"` | no |
