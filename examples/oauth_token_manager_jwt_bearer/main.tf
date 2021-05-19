@@ -5,8 +5,7 @@ module "jwt_bearer" {
   instance_id                       = "example"
   jws_algorithm                     = "PS256"
   active_signing_certificate_key_id = "example"
-
-  extended_attributes = ["foo"]
+  extended_attributes               = ["foo"]
   symmetric_keys = [{
     key_id   = "foo"
     key      = random_password.jwt_key.result
@@ -16,6 +15,8 @@ module "jwt_bearer" {
     key_id      = "example"
     certificate = pingfederate_keypair_signing.signer.id
   }]
+
+  pingfederate_version = "10.2"
 }
 
 resource "random_password" "jwt_key" {
