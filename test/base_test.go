@@ -7,6 +7,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/iwarapter/pingfederate-sdk-go/services/keyPairsSigning"
+
 	"github.com/iwarapter/pingfederate-sdk-go/services/authenticationSelectors"
 	"github.com/iwarapter/pingfederate-sdk-go/services/idpAdapters"
 	"github.com/iwarapter/pingfederate-sdk-go/services/oauthAccessTokenManagers"
@@ -59,6 +61,10 @@ func getConfigField(conf *pf.PluginConfiguration, field string) string {
 // Bool is a helper routine that allocates a new bool value
 // to store v and returns a pointer to it.
 func Bool(v bool) *bool { return &v }
+
+// Int is a helper routine that allocates a new int value
+// to store v and returns a pointer to it.
+func Int(v int) *int { return &v }
 
 // String is a helper routine that allocates a new string value
 // to store v and returns a pointer to it.
@@ -217,6 +223,25 @@ func dataSetup() error {
 			},
 		}); err != nil {
 			return fmt.Errorf("unable to create test authentication selector\n%s", err)
+		}
+	}
+	signer := keyPairsSigning.New(cfg)
+	if _, _, err := signer.GetKeyPair(&keyPairsSigning.GetKeyPairInput{Id: "signme"}); err != nil {
+		if _, _, err := signer.CreateKeyPair(&keyPairsSigning.CreateKeyPairInput{
+			Body: pf.NewKeyPairSettings{
+				City:             String("test"),
+				CommonName:       String("test"),
+				Country:          String("GB"),
+				Id:               String("signme"),
+				KeyAlgorithm:     String("RSA"),
+				KeySize:          Int(2048),
+				Organization:     String("test"),
+				OrganizationUnit: String("test"),
+				State:            String("test"),
+				ValidDays:        Int(365),
+			},
+		}); err != nil {
+
 		}
 	}
 	return nil
