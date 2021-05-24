@@ -1,17 +1,7 @@
-# github.com/Nvveen/Gotty v0.0.0-20120604004816-cd527374f1e5
-## explicit
-# github.com/cenkalti/backoff v2.2.1+incompatible
-## explicit
-# github.com/containerd/continuity v0.0.0-20190827140505-75bee3e2ccb6
-## explicit
 # github.com/davecgh/go-spew v1.1.1
 github.com/davecgh/go-spew/spew
-# github.com/google/go-cmp v0.5.0
-## explicit
 # github.com/google/uuid v1.1.1
 github.com/google/uuid
-# github.com/gotestyourself/gotestyourself v1.4.0
-## explicit
 # github.com/gruntwork-io/terratest v0.30.0
 ## explicit
 github.com/gruntwork-io/terratest/modules/collections
@@ -33,18 +23,13 @@ github.com/iwarapter/pingfederate-sdk-go/pingfederate/models
 github.com/iwarapter/pingfederate-sdk-go/pingfederate/request
 github.com/iwarapter/pingfederate-sdk-go/services/authenticationSelectors
 github.com/iwarapter/pingfederate-sdk-go/services/idpAdapters
+github.com/iwarapter/pingfederate-sdk-go/services/keyPairsSigning
 github.com/iwarapter/pingfederate-sdk-go/services/oauthAccessTokenManagers
 github.com/iwarapter/pingfederate-sdk-go/services/passwordCredentialValidators
 github.com/iwarapter/pingfederate-sdk-go/services/version
 # github.com/kr/text v0.2.0
 ## explicit
-# github.com/lib/pq v1.7.0
-## explicit
 # github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e
-## explicit
-# github.com/opencontainers/runc v0.1.1
-## explicit
-# github.com/ory/dockertest v3.3.5+incompatible
 ## explicit
 # github.com/pmezard/go-difflib v1.0.0
 github.com/pmezard/go-difflib/difflib
