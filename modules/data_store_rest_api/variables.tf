@@ -100,18 +100,15 @@ variable "test_url" {
   default     = null
 }
 
+
 variable "api_attributes" {
-  type = map(object({
-    local = string
-    json  = string
-  }))
+  type        = map(string)
   description = "attributes to return from the api"
+
 }
 
 variable "http_request_headers" {
-  type = map(object({
-    header_name  = string
-    header_value = string
-  }))
+  type        = map(string)
   description = "http request headers send to the api"
+
 }

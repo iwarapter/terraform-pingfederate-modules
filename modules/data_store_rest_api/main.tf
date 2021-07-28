@@ -94,11 +94,11 @@ resource "pingfederate_custom_data_store" "rest_api_data_source" {
         content {
           fields {
             name  = "Local Attribute"
-            value = var.api_attributes[rows.key].local
+            value = rows.key
           }
           fields {
             name  = "JSON Response Attribute Path"
-            value = var.api_attributes[rows.key].json
+            value = rows.value
           }
         }
 
@@ -111,11 +111,11 @@ resource "pingfederate_custom_data_store" "rest_api_data_source" {
         content {
           fields {
             name  = "Header Name"
-            value = var.http_request_headers[rows.key].header_name
+            value = rows.key
           }
           fields {
             name  = "Header Value"
-            value = var.http_request_headers[rows.key].header_value
+            value = rows.value
           }
         }
 
