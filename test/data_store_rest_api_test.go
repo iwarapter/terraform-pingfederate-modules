@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	"github.com/iwarapter/pingfederate-sdk-go/pingfederate/client"
 	"github.com/iwarapter/pingfederate-sdk-go/services/dataStores"
 	"github.com/stretchr/testify/assert"
 )
@@ -57,9 +56,7 @@ func TestDataStoreRestApi(t *testing.T) {
 				defer terraform.Destroy(t, terraformOptions)
 				terraform.InitAndApply(t, terraformOptions)
 
-				ds, _, err := client.GetDataStores(&dataStores.GetDataStores())
-				
-
+				ds, _, err := client.GetDataStores(&dataStores.GetDataStores()),
 				assert.Nil(t, err)
 				assert.NotNil(t, ds)
 
