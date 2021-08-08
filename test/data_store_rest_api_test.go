@@ -3,6 +3,8 @@ package test
 import (
 	"testing"
 
+	"github.com/iwarapter/pingfederate-sdk-go/pingfederate/models"
+
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/iwarapter/pingfederate-sdk-go/services/dataStores"
 	"github.com/stretchr/testify/assert"
@@ -15,11 +17,13 @@ func TestDataStoreRestApi(t *testing.T) {
 	client := dataStores.New(cfg)
 
 	tests := []struct {
-		testName    string
-		name        string
-		baseURL     string
-		apiAttr     map[string]string
-		httpRequest map[string]string
+		testName      string
+		name          string
+		baseURL       string
+		apiAttr       map[string]string
+		httpRequest   map[string]string
+		expectedError bool
+		errorMessage  string
 	}{
 		{
 			testName: "default deployment",
@@ -56,11 +60,12 @@ func TestDataStoreRestApi(t *testing.T) {
 				defer terraform.Destroy(t, terraformOptions)
 				terraform.InitAndApply(t, terraformOptions)
 
-				ds, _, err := client.GetDataStores(&dataStores.GetDataStores()),
+				ds, _, err := client.GetDataStores()
 				assert.Nil(t, err)
 				assert.NotNil(t, ds)
+				assert.Len(t, ds.Items, 1)
 
-				assert.Equal(t, ds.Name, tc.name)
+				assert.Equal(t, (*ds.Items)[0].(models.CustomDataStore).Name, tc.name)
 			}
 		})
 	}
