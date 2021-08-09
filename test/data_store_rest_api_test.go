@@ -1,10 +1,12 @@
 package test
 
 import (
+	"strings"
 	"testing"
 
+	"github.com/stretchr/testify/require"
+
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	"github.com/iwarapter/pingfederate-sdk-go/pingfederate/models"
 	"github.com/iwarapter/pingfederate-sdk-go/services/dataStores"
 	"github.com/stretchr/testify/assert"
 )
@@ -58,13 +60,14 @@ func TestDataStoreRestApi(t *testing.T) {
 			} else {
 				defer terraform.Destroy(t, terraformOptions)
 				terraform.InitAndApply(t, terraformOptions)
+				dsId := terraform.Output(t, terraformOptions, "id")
+				assert.NotEmpty(t, dsId)
+				dsId = strings.Trim(dsId, `"`)
+				ds, _, err := client.GetCustomDataStore(&dataStores.GetCustomDataStoreInput{Id: dsId})
+				require.Nil(t, err)
+				require.NotNil(t, ds)
 
-				ds, _, err := client.GetDataStores()
-				assert.Nil(t, err)
-				assert.NotNil(t, ds)
-				assert.Len(t, ds.Items, 1)
-
-				assert.Equal(t, (*ds.Items)[0].(models.CustomDataStore).Name, tc.name)
+				assert.Equal(t, *ds.Name, tc.name)
 			}
 		})
 	}
