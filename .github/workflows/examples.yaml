@@ -94,3 +94,7 @@ jobs:
           TF_VAR_pingfederate_version: 10.2.2
         run: terraform destroy --auto-approve
         working-directory: ${{ matrix.directory }}
+
+      - name: Container logs
+        if: ${{ failure() }}
+        run: docker logs `docker ps --filter expose=9999 -q`
