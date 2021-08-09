@@ -6,7 +6,15 @@
 version: 2
 updates:
   - package-ecosystem: "terraform"
-    directory: "/"
+    directory: "/modules/oauth_token_manager_reference_bearer"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "terraform"
+    directory: "/modules/oauth_token_manager_jwt_bearer"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "terraform"
+    directory: "/modules/idp_html_form_idp_adapter"
     schedule:
       interval: "daily"
   - package-ecosystem: "gomod"
