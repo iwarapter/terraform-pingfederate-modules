@@ -14,7 +14,11 @@ jobs:
         run: |
           DIRS=$(python -c "import json; import glob; print(json.dumps([x.replace('/versions.tf', '') for x in glob.glob('./**/versions.tf', recursive=True)]))")
           echo "::set-output name=directories::$DIRS"
+      - name: Get current date
+        id: getdate
+        run: echo "::set-output name=date::$(date +'%y%m%d')"
     outputs:
+      date: ${{ steps.getdate.outputs.date }}
       directories: ${{ steps.matrix.outputs.directories }}
 
   examples:
@@ -33,7 +37,7 @@ jobs:
           PING_IDENTITY_DEVOPS_KEY: ${{ secrets.PING_IDENTITY_DEVOPS_KEY }}
           SERVER_PROFILE_URL: https://github.com/pingidentity/pingidentity-server-profiles.git
           SERVER_PROFILE_PATH: getting-started/pingfederate
-          IMAGE_VERSION: pingfederate-alpine-az11-10.2.2-210508-d9b5
+          IMAGE_VERSION: pingfederate-alpine-az11-10.2.2-${{ needs.getdate.outputs.date }}-d9b5
           PF_LOG_LEVEL: DEBUG
           TAIL_LOG_PARALLEL: "y"
           TAIL_LOG_FILES: "/opt/out/instance/log/server.log /opt/out/instance/log/admin-api.log"
