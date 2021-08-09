@@ -51,3 +51,7 @@ jobs:
           TF_VAR_pingfederate_version: ${{ matrix.pingfederate-version }}
         run: |
           go test -count=1 -v -timeout 30m  ./...
+
+      - name: Container logs
+        if: ${{ failure() }}
+        run: docker logs `docker ps --filter expose=9999 -q`
