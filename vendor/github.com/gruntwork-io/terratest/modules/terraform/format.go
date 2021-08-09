@@ -9,11 +9,17 @@ import (
 	"github.com/gruntwork-io/terratest/modules/collections"
 )
 
-// TerraformDefaultLockingStatus - The terratest default command lock status (backwards compatibility)
+const runAllCmd = "run-all"
+
+// TerraformCommandsWithLockSupport is a list of all the Terraform commands that
+// can obtain locks on Terraform state
 var TerraformCommandsWithLockSupport = []string{
 	"plan",
+	"plan-all",
 	"apply",
+	"apply-all",
 	"destroy",
+	"destroy-all",
 	"init",
 	"refresh",
 	"taint",
@@ -21,24 +27,69 @@ var TerraformCommandsWithLockSupport = []string{
 	"import",
 }
 
+// TerraformCommandsWithPlanFileSupport is a list of all the Terraform commands that support interacting with plan
+// files.
+var TerraformCommandsWithPlanFileSupport = []string{
+	"plan",
+	"apply",
+	"show",
+	"graph",
+}
+
 // FormatArgs converts the inputs to a format palatable to terraform. This includes converting the given vars to the
 // format the Terraform CLI expects (-var key=value).
 func FormatArgs(options *Options, args ...string) []string {
 	var terraformArgs []string
 	commandType := args[0]
+	// If the user is trying to run with run-all, then we need to make sure the command based args are based on the
+	// actual terraform command. E.g., we want to base the logic on `plan` when `run-all plan` is passed in, not
+	// `run-all`.
+	if commandType == runAllCmd {
+		commandType = args[1]
+	}
 	lockSupported := collections.ListContains(TerraformCommandsWithLockSupport, commandType)
+	planFileSupported := collections.ListContains(TerraformCommandsWithPlanFileSupport, commandType)
+
+	// Include -var and -var-file flags unless we're running 'apply' with a plan file
+	includeVars := !(commandType == "apply" && len(options.PlanFilePath) > 0)
 
 	terraformArgs = append(terraformArgs, args...)
-	terraformArgs = append(terraformArgs, FormatTerraformVarsAsArgs(options.Vars)...)
-	terraformArgs = append(terraformArgs, FormatTerraformArgs("-var-file", options.VarFiles)...)
+
+	if includeVars {
+		terraformArgs = append(terraformArgs, FormatTerraformVarsAsArgs(options.Vars)...)
+		terraformArgs = append(terraformArgs, FormatTerraformArgs("-var-file", options.VarFiles)...)
+	}
+
 	terraformArgs = append(terraformArgs, FormatTerraformArgs("-target", options.Targets)...)
+
+	if options.NoColor {
+		terraformArgs = append(terraformArgs, "-no-color")
+	}
 
 	if lockSupported {
 		// If command supports locking, handle lock arguments
 		terraformArgs = append(terraformArgs, FormatTerraformLockAsArgs(options.Lock, options.LockTimeout)...)
 	}
 
+	if planFileSupported {
+		// The plan file arg should be last in the terraformArgs slice. Some commands use it as an input (e.g. show, apply)
+		terraformArgs = append(terraformArgs, FormatTerraformPlanFileAsArg(commandType, options.PlanFilePath)...)
+	}
+
 	return terraformArgs
+}
+
+// FormatTerraformPlanFileAsArg formats the out variable as a command-line arg for Terraform (e.g. of the format
+// -out=/some/path/to/plan.out or /some/path/to/plan.out). Only plan supports passing in the plan file as -out; the
+// other commands expect it as the first positional argument. This returns an empty string if outPath is empty string.
+func FormatTerraformPlanFileAsArg(commandType string, outPath string) []string {
+	if outPath == "" {
+		return nil
+	}
+	if commandType == "plan" {
+		return []string{fmt.Sprintf("%s=%s", "-out", outPath)}
+	}
+	return []string{outPath}
 }
 
 // FormatTerraformVarsAsArgs formats the given variables as command-line args for Terraform (e.g. of the format
@@ -56,6 +107,16 @@ func FormatTerraformLockAsArgs(lockCheck bool, lockTimeout string) []string {
 		lockArgs = append(lockArgs, lockTimeoutValue)
 	}
 	return lockArgs
+}
+
+// FormatTerraformPluginDirAsArgs formats the plugin-dir variable
+// -plugin-dir
+func FormatTerraformPluginDirAsArgs(pluginDir string) []string {
+	pluginArgs := []string{fmt.Sprintf("-plugin-dir=%v", pluginDir)}
+	if pluginDir == "" {
+		return nil
+	}
+	return pluginArgs
 }
 
 // FormatTerraformArgs will format multiple args with the arg name (e.g. "-var-file", []string{"foo.tfvars", "bar.tfvars"})
