@@ -3,9 +3,8 @@ package test
 import (
 	"testing"
 
-	"github.com/iwarapter/pingfederate-sdk-go/pingfederate/models"
-
 	"github.com/gruntwork-io/terratest/modules/terraform"
+	"github.com/iwarapter/pingfederate-sdk-go/pingfederate/models"
 	"github.com/iwarapter/pingfederate-sdk-go/services/dataStores"
 	"github.com/stretchr/testify/assert"
 )
@@ -17,22 +16,22 @@ func TestDataStoreRestApi(t *testing.T) {
 	client := dataStores.New(cfg)
 
 	tests := []struct {
-		testName      string
-		name          string
-		baseURL       string
-		apiAttr       map[string]string
-		httpRequest   map[string]string
-		expectedError bool
-		errorMessage  string
+		testName             string
+		name                 string
+		baseURL              string
+		api_attributes       map[string]string
+		http_request_headers map[string]string
+		expectedError        bool
+		errorMessage         string
 	}{
 		{
 			testName: "default deployment",
 			name:     "test1",
 			baseURL:  "https://foo.com/api/v1",
-			apiAttr: map[string]string{
+			api_attributes: map[string]string{
 				"foo": "/foo",
 			},
-			httpRequest: map[string]string{
+			http_request_headers: map[string]string{
 				"Host": "api.server.com",
 			},
 		},
@@ -44,10 +43,10 @@ func TestDataStoreRestApi(t *testing.T) {
 				TerraformDir: "../modules/data_store_rest_api",
 
 				Vars: map[string]interface{}{
-					"name":        tc.name,
-					"baseURL":     tc.baseURL,
-					"apiAttr":     tc.apiAttr,
-					"httpRequest": tc.httpRequest,
+					"name":                 tc.name,
+					"baseURL":              tc.baseURL,
+					"api_attributes":       tc.api_attributes,
+					"http_request_headers": tc.http_request_headers,
 				},
 				NoColor: true,
 			}
