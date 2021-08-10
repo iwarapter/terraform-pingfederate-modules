@@ -265,6 +265,14 @@ resource "pingfederate_idp_adapter" "adapter" {
   }
 
   attribute_contract {
+    dynamic "core_attributes" {
+      for_each = var.core_attributes
+      content {
+        name      = core_attributes.value["name"]
+        masked    = core_attributes.value["masked"]
+        pseudonym = core_attributes.value["pseudonym"]
+      }
+    }
     dynamic "extended_attributes" {
       for_each = var.extended_attributes
       content {
