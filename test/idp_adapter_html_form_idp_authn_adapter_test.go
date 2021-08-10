@@ -43,7 +43,6 @@ func TestIdpAdapterHtmlFormAdapter(t *testing.T) {
 				Vars: map[string]interface{}{
 					"name":                              tc.name,
 					"password_credential_validator_ids": []string{"examplepcv"},
-					"pingfederate_version":              "10.2",
 				},
 				NoColor: true,
 			}
