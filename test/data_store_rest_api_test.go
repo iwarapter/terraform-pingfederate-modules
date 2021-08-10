@@ -61,13 +61,15 @@ func TestDataStoreRestApi(t *testing.T) {
 				defer terraform.Destroy(t, terraformOptions)
 				terraform.InitAndApply(t, terraformOptions)
 				dsId := terraform.Output(t, terraformOptions, "id")
-				assert.NotEmpty(t, dsId)
+				require.NotEmpty(t, dsId)
 				dsId = strings.Trim(dsId, `"`)
 				ds, _, err := client.GetCustomDataStore(&dataStores.GetCustomDataStoreInput{Id: dsId})
 				require.Nil(t, err)
 				require.NotNil(t, ds)
 
 				assert.Equal(t, *ds.Name, tc.name)
+				assert.Equal(t, tc.baseURL, getTableRowValue(ds.Configuration, "Base URLs and Tags", "Base URL"))
+				assert.Equal(t, "None", getConfigField(ds.Configuration, "Authentication Method"))
 			}
 		})
 	}
