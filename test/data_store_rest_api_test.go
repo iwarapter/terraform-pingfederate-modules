@@ -20,8 +20,8 @@ func TestDataStoreRestApi(t *testing.T) {
 	tests := []struct {
 		testName             string
 		name                 string
-		baseURL              string
-		api_attributes       map[string]string
+		base_url             string
+		attributes           map[string]string
 		http_request_headers map[string]string
 		expectedError        bool
 		errorMessage         string
@@ -29,8 +29,8 @@ func TestDataStoreRestApi(t *testing.T) {
 		{
 			testName: "default deployment",
 			name:     "test1",
-			baseURL:  "https://foo.com/api/v1",
-			api_attributes: map[string]string{
+			base_url: "https://foo.com/api/v1",
+			attributes: map[string]string{
 				"foo": "/foo",
 			},
 			http_request_headers: map[string]string{
@@ -46,8 +46,8 @@ func TestDataStoreRestApi(t *testing.T) {
 
 				Vars: map[string]interface{}{
 					"name":                 tc.name,
-					"baseURL":              tc.baseURL,
-					"api_attributes":       tc.api_attributes,
+					"base_url":             tc.base_url,
+					"attributes":           tc.attributes,
 					"http_request_headers": tc.http_request_headers,
 				},
 				NoColor: true,
@@ -68,7 +68,7 @@ func TestDataStoreRestApi(t *testing.T) {
 				require.NotNil(t, ds)
 
 				assert.Equal(t, *ds.Name, tc.name)
-				assert.Equal(t, tc.baseURL, getTableRowValue(ds.Configuration, "Base URLs and Tags", "Base URL"))
+				assert.Equal(t, tc.base_url, getTableRowValue(ds.Configuration, "Base URLs and Tags", "Base URL"))
 				assert.Equal(t, "None", getConfigField(ds.Configuration, "Authentication Method"))
 			}
 		})
