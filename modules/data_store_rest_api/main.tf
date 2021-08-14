@@ -1,4 +1,5 @@
 terraform {
+  required_version = ">= 0.14"
   required_providers {
     pingfederate = {
       source  = "iwarapter/pingfederate"
@@ -15,11 +16,11 @@ resource "pingfederate_custom_data_store" "rest_api_data_source" {
   configuration {
     fields {
       name  = "Authentication Method"
-      value = var.auth_method
+      value = var.authentication_method
     }
     fields {
       name  = "Enable HTTPS Hostname Verification"
-      value = var.https_hostname_verification
+      value = var.enable_https_hostname_verification
     }
     fields {
       name  = "Read Timeout (ms)"
@@ -31,7 +32,7 @@ resource "pingfederate_custom_data_store" "rest_api_data_source" {
     }
     fields {
       name  = "Max Payload Size (KB)"
-      value = var.max_payload
+      value = var.max_payload_size
     }
     fields {
       name  = "Retry Request"
@@ -39,11 +40,11 @@ resource "pingfederate_custom_data_store" "rest_api_data_source" {
     }
     fields {
       name  = "Maximum Retries Limit"
-      value = var.max_retry_request
+      value = var.maximum_retries_limit
     }
     fields {
       name  = "Retry Error Codes"
-      value = var.retry_error_code
+      value = var.retry_error_codes
     }
     fields {
       name  = "Client ID"
@@ -55,23 +56,23 @@ resource "pingfederate_custom_data_store" "rest_api_data_source" {
     }
     fields {
       name  = "OAuth Scope"
-      value = var.oauth_scopes
+      value = var.oauth_scope
     }
     fields {
       name  = "OAuth Token Endpoint"
-      value = var.token_endpoint
+      value = var.oauth_token_endpoint
     }
     fields {
       name  = "Username"
-      value = var.basic_username
+      value = var.username
     }
     fields {
       name  = "Password"
-      value = var.basic_password
+      value = var.password
     }
     fields {
       name  = "Test Connection URL"
-      value = var.test_url
+      value = var.test_connection_url
     }
     tables {
       name = "Base URLs and Tags"
@@ -79,7 +80,7 @@ resource "pingfederate_custom_data_store" "rest_api_data_source" {
         default_row = true
         fields {
           name  = "Base URL"
-          value = var.baseURL
+          value = var.base_url
         }
         fields {
           name  = "Tags"
@@ -90,7 +91,7 @@ resource "pingfederate_custom_data_store" "rest_api_data_source" {
     tables {
       name = "Attributes"
       dynamic "rows" {
-        for_each = var.api_attributes
+        for_each = var.attributes
         content {
           fields {
             name  = "Local Attribute"
