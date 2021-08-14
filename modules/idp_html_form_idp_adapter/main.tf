@@ -2,7 +2,7 @@ terraform {
   required_providers {
     pingfederate = {
       source  = "iwarapter/pingfederate"
-      version = "~> 0.0.16"
+      version = "0.0.19"
     }
   }
 }
@@ -11,8 +11,10 @@ provider "pingfederate" {
   bypass_external_validation = var.bypass_external_validation
 }
 
+data "pingfederate_version" "instance" {}
+
 locals {
-  isPF10_2 = length(regexall("10.[2]", var.pingfederate_version)) > 0
+  isPF10_2 = length(regexall("10.[2]", data.pingfederate_version.instance.version)) > 0
 }
 resource "pingfederate_idp_adapter" "adapter" {
   name = var.name
@@ -37,7 +39,8 @@ resource "pingfederate_idp_adapter" "adapter" {
     dynamic "fields" {
       for_each = local.isPF10_2 ? [1] : []
       content {
-        name = "Change Password Policy Contract"
+        name  = "Change Password Policy Contract"
+        value = var.change_password_policy_contract
       }
     }
 
@@ -45,7 +48,7 @@ resource "pingfederate_idp_adapter" "adapter" {
       for_each = local.isPF10_2 ? [1] : []
       content {
         name  = "Revoke Sessions After Password Change Or Reset"
-        value = "false"
+        value = var.revoke_sessions_after_password_change_or_reset
       }
     }
 
@@ -265,13 +268,15 @@ resource "pingfederate_idp_adapter" "adapter" {
   }
 
   attribute_contract {
-    dynamic "core_attributes" {
-      for_each = var.core_attributes
-      content {
-        name      = core_attributes.value["name"]
-        masked    = core_attributes.value["masked"]
-        pseudonym = core_attributes.value["pseudonym"]
-      }
+    core_attributes {
+      name      = "policy.action"
+      pseudonym = false
+      masked    = false
+    }
+    core_attributes {
+      name      = "username"
+      pseudonym = true
+      masked    = false
     }
     dynamic "extended_attributes" {
       for_each = var.extended_attributes

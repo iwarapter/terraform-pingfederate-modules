@@ -18,13 +18,13 @@ $ terraform apply
 | Name | Version |
 |------|---------|
 | terraform | >= 0.12.26 |
-| pingfederate | 0.0.16 |
+| pingfederate | 0.0.19 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| pingfederate | 0.0.16 |
+| pingfederate | 0.0.19 |
 
 ## Inputs
 

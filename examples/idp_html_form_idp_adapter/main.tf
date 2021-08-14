@@ -3,8 +3,6 @@ module "html_form_adapter" {
   source                            = "../../modules/idp_html_form_idp_adapter"
   name                              = "example"
   password_credential_validator_ids = [pingfederate_password_credential_validator.example.id]
-
-  pingfederate_version = "10.2"
 }
 
 resource "pingfederate_password_credential_validator" "example" {
@@ -38,8 +36,5 @@ resource "pingfederate_password_credential_validator" "example" {
         }
       }
     }
-  }
-  attribute_contract {
-    core_attributes = ["username"]
   }
 }
