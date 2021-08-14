@@ -17,13 +17,13 @@ module "example" {
 
 | Name | Version |
 |------|---------|
-| pingfederate | ~> 0.0.16 |
+| pingfederate | 0.0.19 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| pingfederate | ~> 0.0.16 |
+| pingfederate | 0.0.19 |
 
 ## Inputs
 
@@ -43,8 +43,8 @@ module "example" {
 | change\_password\_email\_notification | Send users a notification upon a password change. | `bool` | `false` | no |
 | change\_password\_email\_template | HTML email template (in <pf\_home>/server/default/conf/template/mail-notifications) used to send a changing password email | `string` | `"message-template-end-user-password-change.html"` | no |
 | change\_password\_message\_template | HTML template (in <pf\_home>/server/default/conf/template) to render when a user is being redirected after successfully changing their password | `string` | `"html.form.message.template.html"` | no |
+| change\_password\_policy\_contract | The policy contract to use for change password. Selecting a policy contract will enable usage of Authentication Policy during password change. | `string` | `""` | no |
 | change\_password\_template | HTML template (in <pf\_home>/server/default/conf/template) to render for a user to change their password | `string` | `"html.form.change.password.template.html"` | no |
-| core\_attributes | A list of IdP adapter attributes that correspond to the attributes exposed by the IdP adapter type. | <pre>list(object({<br>    name      = string<br>    pseudonym = bool<br>    masked    = bool<br>  }))</pre> | <pre>[<br>  {<br>    "masked": false,<br>    "name": "policy.action",<br>    "pseudonym": false<br>  },<br>  {<br>    "masked": false,<br>    "name": "username",<br>    "pseudonym": true<br>  }<br>]</pre> | no |
 | enable\_remember\_my\_username | Allows users to store their username as a cookie when authenticating with this adapter. | `bool` | `false` | no |
 | enable\_this\_is\_my\_device | Allows users to indicate whether their device is shared or private. | `bool` | `false` | no |
 | enable\_username\_recovery | Allow users to get their username from an email | `bool` | `false` | no |
@@ -71,7 +71,6 @@ module "example" {
 | password\_reset\_type | Select the method to use for self-service password reset | `string` | `"NONE"` | no |
 | password\_reset\_username\_template | HTML template (in <pf\_home>/server/default/conf/template) rendered to prompt a user for their username during password reset | `string` | `"forgot-password.html"` | no |
 | ping\_id\_properties | For self-service password reset using PingID, upload your pingid | `string` | `null` | no |
-| pingfederate\_version | Target PingFederate Version | `string` | `"10.0"` | no |
 | post\_password\_change\_re\_authentication\_delay | Amount of time (milliseconds) to wait after a successful password change before automatically re-authenticating the user against the Password Credential Validator using the new password | `number` | `0` | no |
 | remember\_my\_username\_lifetime | Number of days that the username is stored | `number` | `30` | no |
 | require\_verified\_email | The user’s email address has to be verified before a password reset, account unlock or username recovery email is sent | `bool` | `false` | no |

@@ -4,17 +4,6 @@ variable "bypass_external_validation" {
   default     = false
 }
 
-variable "pingfederate_version" {
-  description = "Target PingFederate Version"
-  default     = "10.0"
-  type        = string
-
-  validation {
-    condition     = length(regexall("10.[0-2]", var.pingfederate_version)) > 0
-    error_message = "The pingfederate_version must be either '10.0', '10.1', '10.2'."
-  }
-}
-
 variable "name" {
   description = "The name for the idp adapter"
   type        = string
@@ -55,6 +44,12 @@ variable "allow_password_changes" {
   description = "Allows users to change their password using this adapter."
   default     = false
   type        = bool
+}
+
+variable "change_password_policy_contract" {
+  description = "The policy contract to use for change password. Selecting a policy contract will enable usage of Authentication Policy during password change."
+  default     = ""
+  type        = string
 }
 
 variable "password_management_system" {
@@ -354,27 +349,6 @@ variable "attribute_contract_fulfillment" {
       value       = "username"
     }
   }
-}
-
-variable "core_attributes" {
-  description = "A list of IdP adapter attributes that correspond to the attributes exposed by the IdP adapter type."
-  type = list(object({
-    name      = string
-    pseudonym = bool
-    masked    = bool
-  }))
-  default = [
-    {
-      name      = "policy.action"
-      pseudonym = false
-      masked    = false
-    },
-    {
-      name      = "username"
-      pseudonym = true
-      masked    = false
-    }
-  ]
 }
 
 variable "extended_attributes" {
