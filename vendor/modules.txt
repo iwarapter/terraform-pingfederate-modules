@@ -39,6 +39,7 @@ github.com/iwarapter/pingfederate-sdk-go/pingfederate/config
 github.com/iwarapter/pingfederate-sdk-go/pingfederate/models
 github.com/iwarapter/pingfederate-sdk-go/pingfederate/request
 github.com/iwarapter/pingfederate-sdk-go/services/authenticationSelectors
+github.com/iwarapter/pingfederate-sdk-go/services/dataStores
 github.com/iwarapter/pingfederate-sdk-go/services/idpAdapters
 github.com/iwarapter/pingfederate-sdk-go/services/keyPairsSigning
 github.com/iwarapter/pingfederate-sdk-go/services/oauthAccessTokenManagers

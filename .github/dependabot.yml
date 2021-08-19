@@ -17,6 +17,10 @@ updates:
     directory: "/modules/idp_html_form_idp_adapter"
     schedule:
       interval: "daily"
+  - package-ecosystem: "terraform"
+    directory: "/modules/data_store_rest_api"
+    schedule:
+      interval: "daily"
   - package-ecosystem: "gomod"
     directory: "/"
     schedule:

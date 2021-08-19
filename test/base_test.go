@@ -58,6 +58,21 @@ func getConfigField(conf *pf.PluginConfiguration, field string) string {
 	return ""
 }
 
+func getTableRowValue(conf *pf.PluginConfiguration, table, field string) string {
+	for _, t := range *conf.Tables {
+		if *t.Name == table {
+			for _, r := range *t.Rows {
+				for _, f := range *r.Fields {
+					if *f.Name == field && f.Value != nil {
+						return *f.Value
+					}
+				}
+			}
+		}
+	}
+	return ""
+}
+
 // Bool is a helper routine that allocates a new bool value
 // to store v and returns a pointer to it.
 func Bool(v bool) *bool { return &v }
