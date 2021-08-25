@@ -9,8 +9,8 @@ terraform {
 }
 
 resource "pingfederate_notification_publisher" "pingfederate_notification_publisher" {
-  name         = "example"
-  publisher_id = "example"
+  name         = var.name
+  publisher_id = var.name
   plugin_descriptor_ref {
     id = "com.pingidentity.email.SmtpNotificationPlugin"
   }
@@ -18,55 +18,59 @@ resource "pingfederate_notification_publisher" "pingfederate_notification_publis
   configuration {
     fields {
       name  = "From Address"
-      value = "help@foo.org"
+      value = var.from_address
     }
     fields {
       name  = "Email Server"
-      value = "foo"
+      value = var.email_server
     }
     fields {
       name  = "SMTP Port"
-      value = "25"
+      value = var.smtp_port
     }
     fields {
       name  = "Encryption Method"
-      value = "NONE"
+      value = var.encryption_method
     }
     fields {
       name  = "SMTPS Port"
-      value = "465"
+      value = var.smtps_port
     }
     fields {
       name  = "Verify Hostname"
-      value = "true"
+      value = var.verify_hostname
     }
     fields {
       name  = "Username"
-      value = ""
+      value = var.username
     }
     fields {
       name  = "Password"
-      value = ""
+      value = var.password
     }
     fields {
       name  = "Test Address"
-      value = ""
+      value = var.test_address
     }
     fields {
       name  = "Connection Timeout"
-      value = "30"
+      value = var.connection_timeout
     }
     fields {
       name  = "Retry Attempt"
-      value = "2"
+      value = var.retry_attempt
     }
     fields {
       name  = "Retry Delay"
-      value = "2"
+      value = var.retry_delay
     }
     fields {
       name  = "Enable SMTP Debugging Messages"
-      value = "false"
+      value = var.enable_smtp_debugging_messages
+    }
+    fields {
+      name  = "UTF-8 Message Header Support"
+      value = var.utf_8_message_header_support
     }
   }
 }
