@@ -51,6 +51,8 @@ module "smtp_notification_publisher" {
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| id | The resource ID for the smtp notification publisher |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
