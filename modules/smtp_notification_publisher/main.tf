@@ -8,6 +8,10 @@ terraform {
   }
 }
 
+locals {
+  isPF10_2 = length(regexall("10.[1-2]", var.pingfederate_version)) > 0
+}
+
 resource "pingfederate_notification_publisher" "pingfederate_notification_publisher" {
   name         = var.name
   publisher_id = var.name
@@ -68,9 +72,12 @@ resource "pingfederate_notification_publisher" "pingfederate_notification_publis
       name  = "Enable SMTP Debugging Messages"
       value = var.enable_smtp_debugging_messages
     }
-    fields {
-      name  = "UTF-8 Message Header Support"
-      value = var.utf_8_message_header_support
+    dynamic "fields" {
+      for_each = local.isPF10_2 ? [1] : []
+      content {
+        name  = "UTF-8 Message Header Support"
+        value = var.utf_8_message_header_support
+      }
     }
   }
 }

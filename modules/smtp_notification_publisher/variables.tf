@@ -1,3 +1,14 @@
+variable "pingfederate_version" {
+  description = "Target PingFederate Version"
+  default     = "10.0"
+  type        = string
+
+  validation {
+    condition     = length(regexall("10.[0-2]", var.pingfederate_version)) > 0
+    error_message = "The pingfederate_version must be either '10.0', '10.1', '10.2'."
+  }
+}
+
 variable "name" {
   description = "name of the notification publisher"
   type        = string
