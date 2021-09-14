@@ -3,7 +3,7 @@ terraform {
   required_providers {
     pingfederate = {
       source  = "iwarapter/pingfederate"
-      version = "~> 0.0.16"
+      version = "~> 0.0.21"
     }
   }
 }
@@ -50,10 +50,18 @@ resource "pingfederate_notification_publisher" "pingfederate_notification_publis
       name  = "Username"
       value = var.username
     }
-    sensitive_fields {
-      inherited = false
-      name      = "Password"
-      value     = var.password
+    dynamic "sensitive_fields" {
+      for_each = var.password != "" ? [0] : []
+      content {
+        name  = "Password"
+        value = var.password
+      }
+    }
+    dynamic "fields" {
+      for_each = var.password == "" ? [0] : []
+      content {
+        name = "Password"
+      }
     }
     fields {
       name  = "Test Address"

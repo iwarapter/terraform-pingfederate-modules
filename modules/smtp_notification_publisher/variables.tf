@@ -40,11 +40,13 @@ variable "verify_hostname" {
 variable "username" {
   description = "Authorized email account."
   type        = string
+  default     = ""
 }
 
 variable "password" {
   description = "Password for the authorized email account."
   type        = string
+  default     = ""
   sensitive   = true
 }
 
