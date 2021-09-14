@@ -52,7 +52,7 @@ func TestSmtpNotificationPublisher(t *testing.T) {
 				}
 			} else {
 				defer terraform.Destroy(t, terraformOptions)
-				terraform.InitAndApply(t, terraformOptions)
+				terraform.InitAndApplyAndIdempotent(t, terraformOptions)
 				smtppubId := terraform.Output(t, terraformOptions, "id")
 				require.NotEmpty(t, smtppubId)
 				smtppubId = strings.Trim(smtppubId, `"`)

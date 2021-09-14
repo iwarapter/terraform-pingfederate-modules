@@ -8,8 +8,10 @@ terraform {
   }
 }
 
+data "pingfederate_version" "instance" {}
+
 locals {
-  isPF10_2 = length(regexall("10.[1-2]", var.pingfederate_version)) > 0
+  isPF10_2 = length(regexall("10.[1-9]", data.pingfederate_version.instance.version)) > 0
 }
 
 resource "pingfederate_notification_publisher" "pingfederate_notification_publisher" {
@@ -48,9 +50,10 @@ resource "pingfederate_notification_publisher" "pingfederate_notification_publis
       name  = "Username"
       value = var.username
     }
-    fields {
-      name  = "Password"
-      value = var.password
+    sensitive_fields {
+      inherited = false
+      name      = "Password"
+      value     = var.password
     }
     fields {
       name  = "Test Address"
