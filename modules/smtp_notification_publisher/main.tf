@@ -16,7 +16,7 @@ locals {
 
 resource "pingfederate_notification_publisher" "pingfederate_notification_publisher" {
   name         = var.name
-  publisher_id = var.name
+  publisher_id = var.publisher_id
   plugin_descriptor_ref {
     id = "com.pingidentity.email.SmtpNotificationPlugin"
   }

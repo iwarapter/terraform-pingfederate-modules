@@ -26,6 +26,7 @@ func TestSmtpNotificationPublisher(t *testing.T) {
 		password      string
 		expectedError bool
 		errorMessage  string
+		publisher_id  string
 	}{
 		{
 			testName:     "unauthenticated publisher works",
@@ -34,6 +35,7 @@ func TestSmtpNotificationPublisher(t *testing.T) {
 			email_server: "server.foo.com",
 			username:     "",
 			password:     "",
+			publisher_id: "foo",
 		},
 		{
 			testName:     "authenticated publisher works",
@@ -42,6 +44,7 @@ func TestSmtpNotificationPublisher(t *testing.T) {
 			email_server: "server.foo.com",
 			username:     "foo",
 			password:     "bar",
+			publisher_id: "foo",
 		},
 	}
 	for _, tc := range tests {
@@ -56,6 +59,7 @@ func TestSmtpNotificationPublisher(t *testing.T) {
 					"email_server": tc.email_server,
 					"username":     tc.username,
 					"password":     tc.password,
+					"publisher_id": tc.publisher_id,
 				},
 				NoColor: true,
 			}
