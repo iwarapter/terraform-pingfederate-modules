@@ -8,7 +8,7 @@ github.com/apparentlymart/go-textseg/v12/textseg
 github.com/davecgh/go-spew/spew
 # github.com/google/uuid v1.1.1
 github.com/google/uuid
-# github.com/gruntwork-io/terratest v0.37.5
+# github.com/gruntwork-io/terratest v0.37.9
 ## explicit
 github.com/gruntwork-io/terratest/modules/collections
 github.com/gruntwork-io/terratest/modules/files
