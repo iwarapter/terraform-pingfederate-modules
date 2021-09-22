@@ -6,6 +6,10 @@ variable "name" {
 variable "publisher_id" {
   description = "id of the notification publisher"
   type        = string
+  validation {
+    condition     = can(regex("^[a-z0-9]{1,32}$", var.publisher_id))
+    error_message = "The ID must be less than 33 characters, contain no spaces, and be alphanumeric."
+  }
 }
 
 variable "from_address" {

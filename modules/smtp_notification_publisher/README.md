@@ -21,13 +21,13 @@ module "smtp_notification_publisher" {
 | Name | Version |
 |------|---------|
 | terraform | >= 0.14 |
-| pingfederate | ~> 0.0.19 |
+| pingfederate | ~> 0.0.21 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| pingfederate | ~> 0.0.19 |
+| pingfederate | ~> 0.0.21 |
 
 ## Inputs
 
