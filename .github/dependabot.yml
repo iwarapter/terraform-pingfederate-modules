@@ -21,6 +21,10 @@ updates:
     directory: "/modules/data_store_rest_api"
     schedule:
       interval: "daily"
+  - package-ecosystem: "terraform"
+    directory: "/modules/smtp_notification_publisher"
+    schedule:
+      interval: "daily"
   - package-ecosystem: "gomod"
     directory: "/"
     schedule:

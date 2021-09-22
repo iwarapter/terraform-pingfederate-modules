@@ -15,16 +15,11 @@ $ terraform apply
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| terraform | >= 0.14 |
-| pingfederate | 0.0.16 |
+No requirements.
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| pingfederate | 0.0.19 |
+No provider.
 
 ## Inputs
 
