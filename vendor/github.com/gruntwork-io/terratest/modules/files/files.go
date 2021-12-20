@@ -2,10 +2,13 @@
 package files
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/mattn/go-zglob"
 )
 
 // FileExists returns true if the given file exists.
@@ -39,12 +42,18 @@ func IsExistingDir(path string) bool {
 // CopyTerraformFolderToTemp creates a copy of the given folder and all its contents in a temp folder with a unique name and the given prefix.
 // This is useful when running multiple tests in parallel against the same set of Terraform files to ensure the
 // tests don't overwrite each other's .terraform working directory and terraform.tfstate files. This method returns
-// the path to the temp folder with the copied contents. Hidden files and folders, Terraform state files, and
-// terraform.tfvars files are not copied to this temp folder, as you typically don't want them interfering with your
-// tests.
+// the path to the temp folder with the copied contents. Hidden files and folders (with the exception of the `.terraform-version` files used
+// by the [tfenv tool](https://github.com/tfutils/tfenv)), Terraform state files, and terraform.tfvars files are not copied to this temp folder,
+// as you typically don't want them interfering with your tests.
 func CopyTerraformFolderToTemp(folderPath string, tempFolderPrefix string) (string, error) {
 	filter := func(path string) bool {
-		return !PathContainsHiddenFileOrFolder(path) && !PathContainsTerraformStateOrVars(path)
+		if PathIsTerraformVersionFile(path) {
+			return true
+		}
+		if PathContainsHiddenFileOrFolder(path) || PathContainsTerraformStateOrVars(path) {
+			return false
+		}
+		return true
 	}
 
 	destFolder, err := CopyFolderToTemp(folderPath, tempFolderPrefix, filter)
@@ -173,6 +182,11 @@ func PathContainsHiddenFileOrFolder(path string) bool {
 	return false
 }
 
+// PathIsTerraformVersionFile returns true if the given path is the special '.terraform-version' file used by the [tfenv](https://github.com/tfutils/tfenv) tool.
+func PathIsTerraformVersionFile(path string) bool {
+	return filepath.Base(path) == ".terraform-version"
+}
+
 // CopyFile copies a file from source to destination.
 func CopyFile(source string, destination string) error {
 	contents, err := ioutil.ReadFile(source)
@@ -212,4 +226,24 @@ func copySymLink(source string, destination string) error {
 	}
 
 	return nil
+}
+
+// FindTerraformSourceFilesInDir given a directory path, finds all the terraform source files contained in it. This will
+// recursively search subdirectories, but will ignore any hidden files (which in turn ignores terraform data dirs like
+// .terraform folder).
+func FindTerraformSourceFilesInDir(dirPath string) ([]string, error) {
+	pattern := fmt.Sprintf("%s/**/*.tf", dirPath)
+	matches, err := zglob.Glob(pattern)
+	if err != nil {
+		return nil, err
+	}
+
+	tfFiles := []string{}
+	for _, match := range matches {
+		// Don't include hidden .terraform directories when finding paths to validate
+		if !PathContainsHiddenFileOrFolder(match) {
+			tfFiles = append(tfFiles, match)
+		}
+	}
+	return tfFiles, nil
 }
