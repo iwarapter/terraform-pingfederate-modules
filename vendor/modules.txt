@@ -56,7 +56,7 @@ github.com/mitchellh/go-wordwrap
 ## explicit
 # github.com/pmezard/go-difflib v1.0.0
 github.com/pmezard/go-difflib/difflib
-# github.com/stretchr/testify v1.7.0
+# github.com/stretchr/testify v1.7.5
 ## explicit
 github.com/stretchr/testify/assert
 github.com/stretchr/testify/require
@@ -88,5 +88,5 @@ golang.org/x/text/transform
 golang.org/x/text/unicode/norm
 # gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f
 ## explicit
-# gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
+# gopkg.in/yaml.v3 v3.0.1
 gopkg.in/yaml.v3
